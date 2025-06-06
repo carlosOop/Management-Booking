@@ -1,32 +1,32 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication1.Models;
 
-namespace WebApplication1.Controllers
+namespace BookingManagement.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
-            return View();
+            return View("~/Views/Home/Index.cshtml");
         }
 
-        public IActionResult Privacy()
+        public IActionResult History()
         {
-            return View();
+            return View("~/Views/History/History.cshtml");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Manageroom()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View("~/Views/ManageRoom/Manageroom.cshtml");
+        }
+
+        public IActionResult CustomerRegistration()
+        {
+            return View("~/Views/CustomerRegistration/Registration.cshtml");
+        }
+
+        public IActionResult Checkout()
+        {
+            return View("~/Views/Checkout/Checkout.cshtml");
         }
     }
 }
