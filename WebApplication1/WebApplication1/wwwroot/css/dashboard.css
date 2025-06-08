@@ -1,0 +1,160 @@
+﻿body {
+    background-image: url('/images/color_dashboard.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.navbar-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    object-fit: cover;
+}
+
+.site-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.nav-link {
+    font-weight: 600;
+    color: #333 !important;
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 5px;
+    padding: 0.5rem 0.75rem;
+}
+
+    .nav-link:hover {
+        background-color: royalblue;
+        color: white !important;
+    }
+
+.profile-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dashboard-wrapper {
+    padding: 2rem;
+    min-height: 100px;
+}
+
+.welcome-title {
+    text-align: left;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #222;
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin: 1rem 0;
+}
+
+.dashboard-header {
+    display: flex;
+    height: 400px;
+    background-color: #ffffffcc;
+    margin-bottom: 3rem;
+    border-radius: 10px;
+}
+
+.header-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    background-image: url('../images/dashboard header.jpg');
+}
+
+.main-banner {
+    margin-bottom: 2rem;
+}
+
+.banner-image {
+    width: 100%;
+    border-radius: 10px;
+    max-height: 10px;
+    overflow: hidden;
+}
+
+.rooms-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.room-icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+}
+
+.room-icon {
+    width: 300px;
+    height: 250px;
+    border-radius: 10%;
+    object-fit: cover;
+    border: 1px solid #aaa;
+    margin-bottom: 0.5rem;
+}
+
+.room-description {
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-align: center;
+    color: #333;
+}
+
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.info-box {
+    background-color: #ffffffcc;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    font-weight: 600;
+}
+
+.info-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #333;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+    .info-table th,
+    .info-table td {
+        border: 1px solid #ccc;
+        padding: 0.5rem;
+        text-align: center;
+    }
+
+    .info-table th {
+        background-color: white;
+        font-weight: 600;
+    }
