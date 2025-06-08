@@ -1,8 +1,80 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="~/css/dashboard.css" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="dashboard-wrapper">
+
+    <h1 class="welcome-title">Welcome, Admin!</h1>
+
+    <div class="dashboard-header">
+        <img src="~/images/dashboard header.jpg" alt="Dashboard Header" class="header-image" />
+    </div>
+
+    <h2 class="section-title">Rooms</h2>
+
+    <div class="main-banner">
+        <img src="~/images/color_dashboard.png" alt="Banner" class="banner-image" />
+    </div>
+
+    <section class="rooms-section">
+        <div class="room-icon-container">
+            <img src="~/images/deluxe.jpg" alt="Room" class="room-icon" />
+            <div class="room-description">Deluxe Room</div>
+        </div>
+        <div class="room-icon-container">
+            <img src="~/images/standard.jpg" alt="Room" class="room-icon" />
+            <div class="room-description">Standard Room</div>
+        </div>
+        <div class="room-icon-container">
+            <img src="~/images/suite.jpg" alt="Room" class="room-icon" />
+            <div class="room-description">Suite</div>
+        </div>
+        <div class="room-icon-container">
+            <img src="~/images/familyroom.jpg" alt="Room" class="room-icon" />
+            <div class="room-description">Family Room</div>
+        </div>
+    </section>
+
+    <section class="info-grid">
+        <div class="info-box">
+            <div class="info-title">Room Available</div>
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>Room Type</th>
+                        <th>Available</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Deluxe</td><td>2</td></tr>
+                    <tr><td>Standard</td><td>3</td></tr>
+                    <tr><td>Suite</td><td>1</td></tr>
+                    <tr><td>Family</td><td>4</td></tr>
+                    <tr><td>Presidential</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-box">
+            <div class="info-title">Room Occupied</div>
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>Room Type</th>
+                        <th>Occupied</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Deluxe</td><td>3</td></tr>
+                    <tr><td>Standard</td><td>1</td></tr>
+                    <tr><td>Suite</td><td>2</td></tr>
+                    <tr><td>Family</td><td>1</td></tr>
+                    <tr><td>Presidential</td><td>0</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
 </div>
