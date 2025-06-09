@@ -2,7 +2,330 @@
     ViewData["Title"] = "Manageroom";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Manageroom</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MANAGE_ROOM</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body class="bg-white min-h-screen flex flex-col">
+    
+    <header class="flex items-center justify-between border border-t-0 border-x-0 border-gray-700 bg-white px-4 py-2">
+        <div class="flex items-center space-x-2">
+            <div class="w-10 h-10 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs font-semibold text-gray-700 select-none">
+                LOGO
+            </div>
+            <span class="text-gray-700 font-semibold text-sm select-none">Hotel Management System</span>
+        </div>
+        <nav class="flex space-x-20 text-gray-700 text-sm font-semibold">
+            <a href="#" class="hover:underline ">Home</a>
+            <a href="#" class="hover:underline">History</a>
+            <a href="#" class="bg-green-700 text-white rounded-full px-4 py-1.5 hover:bg-green-800 transition">Manage Room!!</a>
+            <a href="#" class="hover:underline">Customer Registration</a>
+            <a href="#" class="hover:underline">Check Out</a>
+        </nav>
+        <div>
+            <button aria-label="User profile"
+                    class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-700">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </header>
+
+    
+    <div class="flex justify-end space-x-3 px-4 py-3 border-b border-gray-700 bg-white">
+        <button id="editBtn" class="bg-orange-500 text-white text-xs font-semibold rounded-md px-4 py-1.5 hover:bg-orange-600 transition disabled:opacity-50" disabled>
+            Edit
+        </button>
+        <button id="deleteBtn" class="bg-red-600 text-white text-xs font-semibold rounded-md px-4 py-1.5 hover:bg-red-700 transition disabled:opacity-50" disabled>
+            Delete
+        </button>
+    </div>
+
+    
+    <div class="flex-1 overflow-x-auto px-4 pb-4">
+        <table class="min-w-full border border-gray-700 border-collapse" id="roomTable">
+            <thead>
+                <tr class="bg-gray-500 text-white text-center text-lg font-semibold">
+                    <th class="border border-gray-700 px-2 py-3" colspan="13">MANAGE!</th>
+                </tr>
+                <tr class="bg-yellow-200 text-gray-900 text-center text-xs font-semibold">
+                    <th class="border border-gray-700 px-2 py-1">Name</th>
+                    <th class="border border-gray-700 px-2 py-1">Rom Number</th>
+                    <th class="border border-gray-700 px-2 py-1">Room Type</th>
+                    <th class="border border-gray-700 px-2 py-1">Bed</th>
+                    <th class="border border-gray-700 px-2 py-1">Price</th>
+                    <th class="border border-gray-700 px-2 py-1">Mobile No.</th>
+                    <th class="border border-gray-700 px-2 py-1">Nationality</th>
+                    <th class="border border-gray-700 px-2 py-1">Gender</th>
+                    <th class="border border-gray-700 px-2 py-1">Adress</th>
+                    <th class="border border-gray-700 px-2 py-1">Date of birth</th>
+                    <th class="border border-gray-700 px-2 py-1">In date</th>
+                    <th class="border border-gray-700 px-2 py-1">Out Date</th>
+                    <th class="border border-gray-700 px-2 py-1">Select</th>
+                </tr>
+            </thead>
+            <tbody class="text-xs text-gray-900" id="tableBody">
+                <!-- DITO PAPASOK YUNG DATA -->
+            </tbody>
+        </table>
+    </div>
+
+    
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg w-full max-w-3xl p-6 mx-4">
+            <h2 class="text-lg font-semibold mb-4 text-center">Edit Room Information</h2>
+            <form id="editForm" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div>
+                    <label for="editName" class="block font-semibold mb-1">Name</label>
+                    <input type="text" id="editName" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editRoomNumber" class="block font-semibold mb-1">Rom Number</label>
+                    <input type="text" id="editRoomNumber" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editRoomType" class="block font-semibold mb-1">Room Type</label>
+                    <input type="text" id="editRoomType" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editBed" class="block font-semibold mb-1">Bed</label>
+                    <input type="text" id="editBed" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editPrice" class="block font-semibold mb-1">Price</label>
+                    <input type="text" id="editPrice" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editMobileNo" class="block font-semibold mb-1">Mobile No.</label>
+                    <input type="text" id="editMobileNo" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editNationality" class="block font-semibold mb-1">Nationality</label>
+                    <input type="text" id="editNationality" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editGender" class="block font-semibold mb-1">Gender</label>
+                    <input type="text" id="editGender" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editAdress" class="block font-semibold mb-1">Adress</label>
+                    <input type="text" id="editAdress" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editDob" class="block font-semibold mb-1">Date of birth</label>
+                    <input type="date" id="editDob" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editInDate" class="block font-semibold mb-1">In date</label>
+                    <input type="date" id="editInDate" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div>
+                    <label for="editOutDate" class="block font-semibold mb-1">Out Date</label>
+                    <input type="date" id="editOutDate" class="w-full border border-gray-400 rounded px-2 py-1" required />
+                </div>
+                <div class="sm:col-span-2 flex justify-center space-x-4 mt-4">
+                    <button type="submit" class="bg-green-700 text-white rounded-md px-6 py-1 text-sm hover:bg-green-800 transition">Save</button>
+                    <button type="button" id="cancelEdit" class="bg-gray-400 text-white rounded-md px-6 py-1 text-sm hover:bg-gray-500 transition">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg w-full max-w-md p-6 mx-4 text-center">
+            <p class="mb-6 text-sm font-semibold">Are you sure you want to delete this record?</p>
+            <div class="flex justify-center space-x-6">
+                <button id="confirmDelete" class="bg-red-600 text-white rounded-md px-6 py-1 text-sm hover:bg-red-700 transition">Yes</button>
+                <button id="cancelDelete" class="bg-gray-400 text-white rounded-md px-6 py-1 text-sm hover:bg-gray-500 transition">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tableBody = document.getElementById("tableBody");
+        const editBtn = document.getElementById("editBtn");
+        const deleteBtn = document.getElementById("deleteBtn");
+
+        let selectedRow = null;
+        let selectedId = null;
+
+        function updateButtonsState() {
+          const anySelected = selectedRow !== null;
+          editBtn.disabled = !anySelected;
+          deleteBtn.disabled = !anySelected;
+        }
+
+        
+        function formatDateForTable(dateStr) {
+          if (!dateStr) return "";
+          const d = new Date(dateStr);
+          if (isNaN(d)) return dateStr;
+          const mm = String(d.getMonth() + 1).padStart(2, "0");
+          const dd = String(d.getDate()).padStart(2, "0");
+          const yyyy = d.getFullYear();
+          return `${mm}/${dd}/${yyyy}`;
+        }
+
+        
+        function formatDateForInput(dateStr) {
+          if (!dateStr) return "";
+          const parts = dateStr.split("/");
+          if (parts.length !== 3) return dateStr;
+          return `${parts[2]}-${parts[0].padStart(2,"0")}-${parts[1].padStart(2,"0")}`;
+        }
+
+        
+        async function loadData() {
+          try {
+            const response = await fetch('/api/rooms');
+            if (!response.ok) throw new Error('Failed to fetch data');
+            const data = await response.json();
+
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+              const tr = document.createElement('tr');
+              tr.dataset.id = item.id ?? ''; 
+              tr.classList.add('text-left');
+              tr.innerHTML = `
+                <td class="border border-gray-700 px-2 py-1 text-center">${item.name ?? ''}</td>
+                <td class="border border-gray-700 px-2 py-1 text-center">${item.roomNumber ?? ''}</td>
+                <td class="border border-gray-700 px-2 py-1">${item.roomType ?? ''}</td>
+                <td class="border border-gray-700 px-2 py-1">${item.bed ?? ''}</td>
+                <td class="border border-gray-700 px-2 py-1 text-center">${item.price ?? ''}</td>
+                <td class="border border-gray-700 px-2 py-1 text-center">${item.mobileNo ?? ''}</td>
+                <td class="border border-gray-700 px-2 py-1">${item.nationality ?? ''}</td>
+                <td class="border border-gray-700 px-2 py-1 text-center">${item.gender ?? ''}</td>
+                <td class="border border-gray-700 px-2 py-1">${item.address ?? ''}</td>
+                <td class="border border-gray-700 px-2 py-1 text-center">${formatDateForTable(item.dateOfBirth)}</td>
+                <td class="border border-gray-700 px-2 py-1 text-center">${formatDateForTable(item.inDate)}</td>
+                <td class="border border-gray-700 px-2 py-1 text-center">${formatDateForTable(item.outDate)}</td>
+                <td class="border border-gray-700 px-2 py-1 text-center">
+                  <input type="radio" name="selectRow" class="select-radio cursor-pointer" />
+                </td>
+              `;
+              tableBody.appendChild(tr);
+            });
+          } catch (error) {
+            tableBody.innerHTML = `<tr><td colspan="13" class="text-center text-red-600 py-4">No data available or failed to load.</td></tr>`;
+          }
+        }
+
+        
+        tableBody.addEventListener('change', e => {
+          if (e.target.classList.contains('select-radio')) {
+            const radios = tableBody.querySelectorAll('input.select-radio');
+            radios.forEach(r => {
+              if (r !== e.target) r.checked = false;
+            });
+            selectedRow = e.target.closest('tr');
+            selectedId = selectedRow ? selectedRow.dataset.id : null;
+            updateButtonsState();
+          }
+        });
+
+        
+        const editModal = document.getElementById('editModal');
+        const editForm = document.getElementById('editForm');
+        const cancelEdit = document.getElementById('cancelEdit');
+
+        const editInputs = {
+          name: document.getElementById('editName'),
+          roomNumber: document.getElementById('editRoomNumber'),
+          roomType: document.getElementById('editRoomType'),
+          bed: document.getElementById('editBed'),
+          price: document.getElementById('editPrice'),
+          mobileNo: document.getElementById('editMobileNo'),
+          nationality: document.getElementById('editNationality'),
+          gender: document.getElementById('editGender'),
+          adress: document.getElementById('editAdress'),
+          dob: document.getElementById('editDob'),
+          inDate: document.getElementById('editInDate'),
+          outDate: document.getElementById('editOutDate'),
+        };
+
+        
+        editBtn.addEventListener('click', () => {
+          if (!selectedRow) return;
+          const cells = selectedRow.querySelectorAll('td');
+          editInputs.name.value = cells[0].textContent.trim();
+          editInputs.roomNumber.value = cells[1].textContent.trim();
+          editInputs.roomType.value = cells[2].textContent.trim();
+          editInputs.bed.value = cells[3].textContent.trim();
+          editInputs.price.value = cells[4].textContent.trim();
+          editInputs.mobileNo.value = cells[5].textContent.trim();
+          editInputs.nationality.value = cells[6].textContent.trim();
+          editInputs.gender.value = cells[7].textContent.trim();
+          editInputs.adress.value = cells[8].textContent.trim();
+          editInputs.dob.value = formatDateForInput(cells[9].textContent.trim());
+          editInputs.inDate.value = formatDateForInput(cells[10].textContent.trim());
+          editInputs.outDate.value = formatDateForInput(cells[11].textContent.trim());
+
+          editModal.classList.remove('hidden');
+        });
+
+        
+        cancelEdit.addEventListener('click', () => {
+          editModal.classList.add('hidden');
+        });
+
+        
+        editForm.addEventListener('submit', e => {
+          e.preventDefault();
+          if (!selectedRow) return;
+
+          const cells = selectedRow.querySelectorAll('td');
+          cells[0].textContent = editInputs.name.value.trim();
+          cells[1].textContent = editInputs.roomNumber.value.trim();
+          cells[2].textContent = editInputs.roomType.value.trim();
+          cells[3].textContent = editInputs.bed.value.trim();
+          cells[4].textContent = editInputs.price.value.trim();
+          cells[5].textContent = editInputs.mobileNo.value.trim();
+          cells[6].textContent = editInputs.nationality.value.trim();
+          cells[7].textContent = editInputs.gender.value.trim();
+          cells[8].textContent = editInputs.adress.value.trim();
+          cells[9].textContent = formatDateForTable(editInputs.dob.value);
+          cells[10].textContent = formatDateForTable(editInputs.inDate.value);
+          cells[11].textContent = formatDateForTable(editInputs.outDate.value);
+
+          editModal.classList.add('hidden');
+          alert('Record updated (UI only). Connect backend to save changes.');
+        });
+
+        
+        const deleteModal = document.getElementById('deleteModal');
+        const confirmDelete = document.getElementById('confirmDelete');
+        const cancelDelete = document.getElementById('cancelDelete');
+
+       
+        deleteBtn.addEventListener('click', () => {
+          if (!selectedRow) return;
+          deleteModal.classList.remove('hidden');
+        });
+
+        
+        confirmDelete.addEventListener('click', () => {
+          if (!selectedRow) return;
+          selectedRow.remove();
+          selectedRow = null;
+          selectedId = null;
+          updateButtonsState();
+          deleteModal.classList.add('hidden');
+          alert('Record deleted (UI only). Connect backend to delete from database.');
+        });
+
+        
+        cancelDelete.addEventListener('click', () => {
+          deleteModal.classList.add('hidden');
+        });
+
+        
+        loadData();
+    </script>
+</body>
+</html>
