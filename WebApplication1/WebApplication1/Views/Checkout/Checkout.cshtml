@@ -2,7 +2,153 @@
     ViewData["Title"] = "Checkout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to checkout</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Check Out</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
+    <link href="~/css/checkout.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    @{
+        ViewData["Title"] = "Check Out";
+    }
+
+    <div class="container mt-5">
+        <table class="table table-bordered text-center black-border">
+            <thead class="table-light">
+                <tr>
+                    <th colspan="12" class="text-center bg-secondary text-white fs-4">HISTORY</th>
+                </tr>
+                <tr>
+                    <th class="yellow-header">Name</th>
+                    <th class="yellow-header">Room Number</th>
+                    <th class="yellow-header">Room Type</th>
+                    <th class="yellow-header">Bed</th>
+                    <th class="yellow-header">Price</th>
+                    <th class="yellow-header">Mobile No.</th>
+                    <th class="yellow-header">Nationality</th>
+                    <th class="yellow-header">Gender</th>
+                    <th class="yellow-header">Address</th>
+                    <th class="yellow-header">Date of Birth</th>
+                    <th class="yellow-header">In Date</th>
+                    <th class="yellow-header">Out Date</th>
+                </tr>
+            </thead>
+            <tbody id="historyBody">
+                <tr>
+                    <td colspan="12">No data available</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form id="checkOutForm" class="row g-3 align-items-center justify-content-center mt-4" onsubmit="return false;">
+            <div class="col-auto">
+                <label class="form-label" for="nameInput">Name</label>
+                <input type="text" id="nameInput" class="form-control" placeholder="Enter name" readonly />
+            </div>
+            <div class="col-auto">
+                <label class="form-label" for="roomNoInput">Room No</label>
+                <input type="text" id="roomNoInput" class="form-control" placeholder="Room #" readonly />
+            </div>
+            <div class="col-auto">
+                <label class="form-label" for="checkoutInput">Check Out*</label>
+                <input type="date" id="checkoutInput" class="form-control" readonly />
+            </div>
+            <div class="col-auto">
+                <!-- Rounded button -->
+                <button type="button" class="btn btn-success rounded-pill mt-4 px-4" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+                    Check out
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered custom-modal">
+            <div class="modal-content text-center">
+                <div class="modal-body">
+                    <p class="mb-4 mt-2">Are you sure you want to check out?</p>
+                    <button class="btn btn-success rounded-pill px-4 py-2 me-4" onclick="confirmCheckOut()" data-bs-dismiss="modal">Yes</button>
+                    <button class="btn btn-danger rounded-pill px-4 py-2" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tbody = document.getElementById("historyBody");
+        const nameInput = document.getElementById("nameInput");
+        const roomNoInput = document.getElementById("roomNoInput");
+        const checkoutInput = document.getElementById("checkoutInput");
+
+        // Format date as yyyy-mm-dd for input[type=date]
+        function formatDate(date) {
+          const d = new Date(date);
+          const month = (d.getMonth() + 1).toString().padStart(2, "0");
+          const day = d.getDate().toString().padStart(2, "0");
+          const year = d.getFullYear();
+          return `${year}-${month}-${day}`;
+        }
+
+        // Function to be called externally when data is loaded from database
+        // data should be an array of objects with the same structure as before
+        function populateTable(data) {
+          tbody.innerHTML = "";
+          if (!data || data.length === 0) {
+            const tr = document.createElement("tr");
+            const td = document.createElement("td");
+            td.colSpan = 12;
+            td.textContent = "No data available";
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            return;
+          }
+
+          data.forEach((item) => {
+            const tr = document.createElement("tr");
+            tr.style.cursor = "pointer";
+
+            tr.innerHTML = `
+              <td>${item.name}</td>
+              <td>${item.roomNumber}</td>
+              <td>${item.roomType}</td>
+              <td>${item.bed}</td>
+              <td>${item.price}</td>
+              <td>${item.mobileNo}</td>
+              <td>${item.nationality}</td>
+              <td>${item.gender}</td>
+              <td>${item.address}</td>
+              <td>${item.dob}</td>
+              <td>${item.inDate}</td>
+              <td>${item.outDate}</td>
+            `;
+
+            tr.addEventListener("click", () => {
+              nameInput.value = item.name;
+              roomNoInput.value = item.roomNumber;
+              checkoutInput.value = formatDate(new Date());
+            });
+
+            tbody.appendChild(tr);
+          });
+        }
+
+        function confirmCheckOut() {
+          if (!nameInput.value || !roomNoInput.value || !checkoutInput.value) {
+            alert("Please select a record from the history first.");
+            return;
+          }
+          alert("Checked out successfully!");
+          // Clear form after checkout
+          nameInput.value = "";
+          roomNoInput.value = "";
+          checkoutInput.value = "";
+        }
+    </script>
+</body>
+</html>
