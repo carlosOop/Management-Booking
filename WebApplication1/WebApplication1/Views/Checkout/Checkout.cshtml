@@ -67,16 +67,26 @@
 
     <!-- Bootstrap Modal -->
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-center">
-                <div class="modal-body">
-                    <p class="mb-4 mt-2">Are you sure you want to check out?</p>
-                    <button class="btn btn-success rounded-pill px-4 py-2 me-4" onclick="confirmCheckOut()" data-bs-dismiss="modal">Yes</button>
-                    <button class="btn btn-danger rounded-pill px-4 py-2" data-bs-dismiss="modal">Cancel</button>
+        <div class="modal-dialog modal-dialog-centered custom-square-modal">
+            <div class="modal-content p-4">
+                <div class="modal-body text-center d-flex flex-column justify-content-center align-items-center h-100">
+
+                    <!-- Optional Icon -->
+                    <div class="mb-3" style="font-size: 2.5rem;">🔒</div>
+
+                    <!-- Confirmation Message -->
+                    <h5 class="mb-3 fw-bold">Are you sure you want to check out?</h5>
+
+                    <!-- Buttons -->
+                    <div class="d-flex gap-3 mt-3">
+                        <button class="btn btn-success rounded-pill px-4 py-2" onclick="confirmCheckOut()" data-bs-dismiss="modal">Yes</button>
+                        <button class="btn btn-outline-secondary rounded-pill px-4 py-2" data-bs-dismiss="modal">Cancel</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <script>
         const tbody = document.getElementById("historyBody");
