@@ -137,18 +137,3 @@
             tbody.appendChild(tr);
           });
         }
-
-        function confirmCheckOut() {
-          if (!nameInput.value || !roomNoInput.value || !checkoutInput.value) {
-            alert("Please select a record from the history first.");
-            return;
-          }
-          alert("Checked out successfully!");
-          // Clear form after checkout
-          nameInput.value = "";
-          roomNoInput.value = "";
-          checkoutInput.value = "";
-        }
-    </script>
-</body>
-</html>
