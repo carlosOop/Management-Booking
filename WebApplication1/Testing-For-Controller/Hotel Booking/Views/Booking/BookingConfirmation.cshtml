@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Booking Confirmation";
+}
+
+<div class="container mt-5">
+    <h1>Booking Confirmation</h1>
+    <hr />
+    <p>@ViewBag.Message</p>
+    <p>Thank you for your booking! We look forward to welcoming you.</p>
+    <p><a asp-action="CustomerBooking" asp-controller="Booking" class="btn btn-secondary">Book Another Room</a></p>
+    <p><a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary">Go to Home</a></p>
+</div>
